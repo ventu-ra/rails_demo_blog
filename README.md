@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+[![Ruby](https://github.com/ventu-ra/rails_demo_blog/actions/workflows/ruby.yml/badge.svg?branch=main)](https://github.com/ventu-ra/rails_demo_blog/actions/workflows/ruby.yml)
