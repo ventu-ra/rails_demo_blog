@@ -31,7 +31,7 @@ jobs:
           tags: username/repo:latest
 
       - name: Deploy to staging
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
