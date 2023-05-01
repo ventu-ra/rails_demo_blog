@@ -1,5 +1,4 @@
-# .github/workflows/main.yml
-name: CI
+name: Rails CI
 
 on:
   push:
@@ -7,20 +6,18 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Deploy to staging
-        uses: appleboy/ssh-action@master
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          script: |
-            cd /path/to/app
-            docker-compose down
-            docker-compose up -d
+          ruby-version: 3.0.3
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+      - name: Run tests
+        run: bundle exec rspec
