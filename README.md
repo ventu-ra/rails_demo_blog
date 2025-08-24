@@ -19,8 +19,4 @@ rails server
 ```
 
 Acesse [http://localhost:3000](http://localhost:3000) e veja seu blog “Hello World” em ação! 🚀
-
----
-
-**Nota:** Apenas para aprendizado. Segue a filosofia Rails: _“convenção sobre configuração”_.
 ```
