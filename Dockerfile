@@ -16,8 +16,12 @@ RUN gem install bundler && bundle install --jobs 4 --without development test
 # Copiar código da aplicação
 COPY . .
 
-# Pré-compilar assets e preparar DB (produção)
+# Definir argumentos e variáveis de ambiente para build
+ARG RAILS_MASTER_KEY
 ENV RAILS_ENV=production
+ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+
+# Pré-compilar assets e preparar DB (produção)
 RUN rails assets:precompile
 RUN rails db:prepare
 
@@ -25,4 +29,4 @@ RUN rails db:prepare
 EXPOSE 3000
 
 # Entrypoint Rails
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "${PORT:-3000}"]
+CMD ["sh", "-c", "rails server -b 0.0.0.0 -p ${PORT:-3000}"]
