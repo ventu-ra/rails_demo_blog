@@ -1,26 +1,26 @@
-# Demo Blog
+# Rails Demo Blog
+
+💻 Projeto de aprendizado seguindo o tutorial do DHH no Ruby on Rails.
 
 [![Ruby](https://github.com/ventu-ra/rails_demo_blog/actions/workflows/ruby.yml/badge.svg?branch=main)](https://github.com/ventu-ra/rails_demo_blog/actions/workflows/ruby.yml)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+---
 
-Things you may want to cover:
+## Rodando localmente
 
-* Ruby version 3.0.3
+```bash
+git clone https://github.com/seu-usuario/rails_demo_blog.git
+cd rails_demo_blog
+bundle install
+rails db:create db:migrate db:seed
+rails server
+```
 
-* System dependencies
+```
 
-* Configuration
+Acesse [http://localhost:3000](http://localhost:3000) e veja seu blog “Hello World” em ação! 🚀
 
-* Database creation
+---
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+**Nota:** Apenas para aprendizado. Segue a filosofia Rails: _“convenção sobre configuração”_.
+```
