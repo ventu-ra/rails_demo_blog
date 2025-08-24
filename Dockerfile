@@ -1,29 +1,24 @@
-# Base Ruby
+# Use an official Ruby runtime as a parent image
 FROM ruby:3.0.3
 
-# Diretório de trabalho
+# Set the working directory
 WORKDIR /app
 
-# Instalar dependências do sistema
+# Install dependencies (SQLite e Node.js para assets)
 RUN apt-get update && \
     apt-get install -y build-essential nodejs sqlite3 libsqlite3-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# Copiar Gemfile e instalar gems
+# Install gems
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 4 --without development test
+RUN gem install bundler && bundle install --jobs 4
 
-# Copiar todo o código
+# Copy the application code
 COPY . .
 
-# Pré-compilar assets para produção
-RUN RAILS_ENV=production rails assets:precompile
 
-# Banco de dados para produção (SQLite)
-RUN RAILS_ENV=production rails db:prepare
-
-# Expor porta (usada pelo Railway/Render)
+# Expose Rails default port
 EXPOSE 3000
 
-# Comando para iniciar o Rails em produção
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+# Set the entrypoint command
+CMD ["rails", "server", "-b", "0.0.0.0"]
