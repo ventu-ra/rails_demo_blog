@@ -6,11 +6,13 @@ FROM ruby:3.4.7-slim AS build
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y build-essential nodejs sqlite3 libsqlite3-dev imagemagick libyaml-dev && \
+    apt-get install -y build-essential nodejs sqlite3 libsqlite3-dev imagemagick libyaml-dev pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 4 --without development test && \
+RUN gem install bundler && \
+    bundle config set --local without 'development test' && \
+    bundle install --jobs 4 && \
     rm -rf /usr/local/bundle/cache
 
 COPY . .
@@ -29,7 +31,7 @@ FROM ruby:3.4.7-slim
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y nodejs sqlite3 imagemagick && \
+    apt-get install -y nodejs sqlite3 imagemagick pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /usr/local/bundle /usr/local/bundle
