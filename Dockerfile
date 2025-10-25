@@ -1,7 +1,7 @@
 # =========================
 # Stage 1: Build
 # =========================
-FROM ruby:3.0.3-slim AS build
+FROM ruby:3.4.7-slim AS build
 
 WORKDIR /app
 
@@ -24,7 +24,7 @@ RUN bundle exec rails assets:precompile
 # =========================
 # Stage 2: Runtime
 # =========================
-FROM ruby:3.0.3-slim
+FROM ruby:3.4.7-slim
 
 WORKDIR /app
 
