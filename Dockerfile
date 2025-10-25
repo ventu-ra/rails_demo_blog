@@ -6,7 +6,7 @@ FROM ruby:3.4.7-slim AS build
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y build-essential nodejs sqlite3 libsqlite3-dev imagemagick && \
+    apt-get install -y build-essential nodejs sqlite3 libsqlite3-dev imagemagick libyaml-dev && \
     rm -rf /var/lib/apt/lists/*
 
 COPY Gemfile Gemfile.lock ./
